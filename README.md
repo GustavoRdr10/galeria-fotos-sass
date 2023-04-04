@@ -4,7 +4,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 HTML
 SAAS
-CDD
+CSS
 
 💻 Projeto
 Esse projeto foi construído para servir de estudos
