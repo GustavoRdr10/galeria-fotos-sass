@@ -17,6 +17,14 @@ body a {
 body ul {
   list-style: none;
 }
+body h1 {
+  font-family: "Josefin Sans";
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 .header {
   display: flex;
@@ -50,7 +58,7 @@ body ul {
   text-transform: uppercase;
   font-size: 0.8rem;
 }
-.header-navbar ul li .active {
+.header-navbar ul li .active {  
   color: #20C997;
 }
 .header-navbar ul li a:hover {
@@ -72,6 +80,14 @@ body ul {
 }
 .header-social-media ul li a:hover {
   color: #FFF;
+}
+
+h1 {
+  font-family: "Josefin Sans";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .gallery {
@@ -240,7 +256,6 @@ body ul {
   filter: grayscale(0%);
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/refeicoes.jpg");
 }
-
 footer {
   text-align: center;
   padding-bottom: 2rem;

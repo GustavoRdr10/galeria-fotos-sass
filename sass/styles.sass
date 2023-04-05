@@ -19,6 +19,16 @@ body
   ul
     list-style: none
 
+  h1 
+    font-family: 'Josefin Sans'
+    text-align: center
+    position: fixed
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+
+
+
 .header
   display: flex
   justify-content: space-between
@@ -68,7 +78,12 @@ body
 
           &:hover
             color: variables.$primary-color
-
+h1
+  font-family: 'Josefin Sans'
+  position: fixed
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
 
 .gallery
   @include mixins.flex-center
@@ -117,13 +132,13 @@ body
 
   #card-3
     @include mixins.bg-img('cidade.jpg')
-  
+
   #card-4
     @include mixins.bg-img('decoracao.jpg')
 
   #card-5
     @include mixins.bg-img('esportes.jpg')
-  
+
   #card-6
     @include mixins.bg-img('natureza.jpg')
 
