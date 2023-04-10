@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +16,8 @@
         crossorigin="anonymous" />
     <!-- Estilos da aplicação -->
     <link rel="stylesheet" href="../css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 </head>
 <body>
     <header class="header">
@@ -64,9 +67,31 @@
         </div>
     </header>
     <main>
-        <div class="gallery-card" id="card-9">
-            <h1>Irei prosseguir com o desenvolvimento da página de contato!!!!</h1>
-        </div>
+        <section class="form-container">
+            <form action="" onsubmit="return validateForm()">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">E-mail:</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        placeholder="Digite seu e-mail" required>
+                    <small id="emailHelp" class="form-text text-muted"></small>
+                </div>
+                <div class="form-group">
+                    <label for="telefone">Telefone(celular):</label>
+                    <input type="tel"  class="form-control" id="telefone" name="telefone" placeholder="(99) 9999-9999" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Endereço:</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Digite seu endereço"
+                        minlength="6" required>
+                </div>
+                <button type="submit" class="btn-primary">Submit</button>
+            </form>
+            <script>
+                $(document).ready(function () {
+                    $('#telefone').mask('(00) 0 0000-0000');
+                });
+            </script>
+        </section>
     </main>
     <footer>
         <p><span>Contato</span> &copy; 2023</p>
