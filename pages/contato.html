@@ -17,8 +17,14 @@
     <!-- Estilos da aplicação -->
     <link rel="stylesheet" href="../css/styles.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Jquery telefone-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <!-- Codigo do pais-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+
 </head>
+
 <body>
     <header class="header">
         <a href="" class="header-brand">Contato</a>
@@ -70,26 +76,92 @@
         <section class="form-container">
             <form action="" onsubmit="return validateForm()">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">E-mail:</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    <label for="exampleInputNome">Nome:</label>
+                    <input type="text" class="form-control" id="exampleInputNome" aria-describedby="nomeHelp"
+                        placeholder="Digite seu nome" required>
+                    <small id="emailHelp" class="form-text text-muted"></small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail">E-mail:</label>
+                    <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
                         placeholder="Digite seu e-mail" required>
                     <small id="emailHelp" class="form-text text-muted"></small>
                 </div>
                 <div class="form-group">
-                    <label for="telefone">Telefone(celular):</label>
-                    <input type="tel"  class="form-control" id="telefone" name="telefone" placeholder="(99) 9999-9999" required>
+                    <label for="exampleInputTelefone">Telefone(celular):</label>
+                    <input type="tel" class="form-control" id="exampleInputTelefone" placeholder="(99) 9 9999-9999"
+                        data-intl-tel-input required>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Endereço:</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Digite seu endereço"
-                        minlength="6" required>
+                    <label for="exampleInputPassword">Endereço:</label>
+                    <input type="text" class="form-control" id="exampleInputPassword" placeholder="Digite seu endereço"
+                        required>
                 </div>
                 <button type="submit" class="btn-primary">Submit</button>
+                <div class="card-body">
+                    <h5 class="card-title">Resposta do formulário</h5>
+                    <div class="info">
+                        <p class="info-label">Nome:</p>
+                        <p class="info-value" id="nome"></p>
+                    </div>
+                    <div class="info">
+                        <p class="info-label">E-mail:</p>
+                        <p class="info-value" id="email"></p>
+                    </div>
+                    <div class="info">
+                        <p class="info-label">Telefone:</p>
+                        <p class="info-value" id="telefone"></p>
+                    </div>
+                    <div class="info">
+                        <p class="info-label">Endereço:</p>
+                        <p class="info-value" id="endereco"></p>
+                    </div>
+                </div>
             </form>
             <script>
                 $(document).ready(function () {
-                    $('#telefone').mask('(00) 0 0000-0000');
+                    // Inicio da biblioteca e configuração do seletor de país e a bandeira
+                    var input = document.querySelector("#exampleInputTelefone");
+                    var iti = window.intlTelInput(input, {
+                        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+                        separateDialCode: true,
+                        initialCountry: "br",
+                        geoIpLookup: function (success, failure) {
+                            $.get("https://ipinfo.io", function () { }, "jsonp").always(function (resp) {
+                                var countryCode = (resp && resp.country) ? resp.country : "";
+                                success(countryCode);
+                            });
+                        },
+                        preferredCountries: ["br", "us", "gb"]
+                    });
+                    // Adicionando o evento "change" para atualizar o valor do input do telefone com o código do país selecionado
+                    input.addEventListener("change", function () {
+                        var dialCode = iti.getSelectedCountryData().dialCode;
+                        this.value = "+" + dialCode + " " + this.value.replace(/\D/g, '');
+                    });
                 });
+                $('#exampleInputTelefone').mask('(99) 9 9999-9999');
+
+                function validateForm() {
+                    const nome = document.getElementById("exampleInputNome").value;
+                    const email = document.getElementById("exampleInputEmail").value;
+                    const telefone = document.getElementById("exampleInputTelefone").value;
+                    const endereco = document.getElementById("exampleInputPassword").value;
+
+                    const nomeSpan = document.getElementById("nome");
+                    nomeSpan.innerHTML = nome;
+
+                    const emailSpan = document.getElementById("email");
+                    emailSpan.innerHTML = email;
+
+                    const telefoneSpan = document.getElementById("telefone");
+                    telefoneSpan.innerHTML = telefone;
+
+                    const enderecoSpan = document.getElementById("endereco");
+                    enderecoSpan.innerHTML = endereco;
+
+                    return false;
+                }
             </script>
         </section>
     </main>
